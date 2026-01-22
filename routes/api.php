@@ -1,26 +1,12 @@
 <?php
 
+use App\Http\Controllers\ProdutoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-Route::post('jogadores', [JogadorController::class, 'store']);
-Route::get('jogadores', [JogadorController::class, 'index']);
-Route::put('jogadores', [JogadorController::class, 'update']);
-Route::delete('jogadores/{id}', [JogadorController::class, 'delete']);
-Route::get('jogadores/{id}', [JogadorController::class, 'show']);
-*/
+Route::post('produtos', [ProdutoController::class, 'store']);
+Route::get('produtos', [ProdutoController::class, 'index']);
+Route::put('produtos', [ProdutoController::class, 'update']);
+Route::get('produtos/{id}', [ProdutoController::class. 'show']);
+Route::delete('prodtos/{id}', [ProdutoController::class, 'delete']);
