@@ -9,4 +9,4 @@ Route::post('produtos', [ProdutoController::class, 'store']);
 Route::get('produtos', [ProdutoController::class, 'index']);
 Route::put('produtos', [ProdutoController::class, 'update']);
 Route::get('produtos/{id}', [ProdutoController::class. 'show']);
-Route::delete('prodtos/{id}', [ProdutoController::class, 'delete']);
+Route::delete('produtos/{id}', [ProdutoController::class, 'delete']);
