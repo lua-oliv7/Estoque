@@ -14,6 +14,3 @@ Route::delete('produtos/{id}', [ProdutoController::class, 'delete']);
 
 Route::post('clientes', [ClienteController::class, 'store']);
 Route::get('clientes', [ClienteController::class, 'index']);
-Route::put('cliente', [ClienteController::class. 'update']);
-Route::get('clientes/{id}', [ClienteController::class, 'show']);
-Route::delete('cliente/{id}', [ClienteController::class, 'delete']);

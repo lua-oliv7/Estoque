@@ -43,7 +43,7 @@ class ProdutoController extends Controller
         $produto = Produto::find($id);
 
         if(!$produto) {
-            return response()->json(['message' => 'Produto não encontrado']);
+            return response()->json(['message' => 'Produto atualizado com sucesso']);
         }
 
         if(isset($produto)) {
