@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entrada;
+use App\Models\Produto;
 use Illuminate\Http\Request;
 
 
@@ -10,7 +11,19 @@ class EntradaController extends Controller
 {
     public function store(Request $request)
     {
-        $entrada = Entrada::create([
+        $produto = Produto::find($request->id_produto);
+
+        if(!$produto) {
+            return response()->json(['message' => 'Produto não encontrado']);
+        }
+
+        if(isset($entrada)) {
+            $produto->estoque += $entrada->quantidade;
+        }
+
+        $produto->update();
+
+            $entrada = Entrada::create([
             'id_produto' => $request->id_produto,
             'quantidade' => $request->quantidade
         ]);
@@ -28,9 +41,21 @@ class EntradaController extends Controller
     {
         $entrada = Entrada::find($id);
 
-        if(!$entrada) {
+        if($entrada == null) {
             return response()->json(['message' => 'Produto não encontrado']);
         }
+
+        $produto = $entrada-> id_produto;
+
+        $quantidade = $entrada-> quantidade;
+
+        $produto = Produto::find($produto);
+
+        if(isset($produto)) {
+            $produto-> estoque -= $quantidade;
+        }
+
+        $produto->update();
 
         $entrada->delete($id);
 
