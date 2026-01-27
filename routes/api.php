@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\SaidaController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('produtos', [ProdutoController::class, 'store']);
@@ -17,3 +18,7 @@ Route::get('clientes', [ClienteController::class, 'index']);
 Route::post('entradas', [EntradaController::class, 'store']);
 Route::get('entradas', [EntradaController::class, 'index']);
 Route::delete('entradas/{id}', [EntradaController::class, 'delete']);
+
+Route::post('saidas', [SaidaController::class, 'store']);
+Route::get('saidas', [SaidaController::class, 'index']);
+Route::delete('saidas/{id}', [SaidaController::class, 'delete']);
