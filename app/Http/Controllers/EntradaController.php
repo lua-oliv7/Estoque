@@ -13,52 +13,55 @@ class EntradaController extends Controller
     {
         $produto = Produto::find($request->id_produto);
 
-        if(!$produto) {
+        if (!$produto) {
             return response()->json(['message' => 'Produto não encontrado']);
         }
 
-        if(isset($entrada)) {
-            $produto->estoque += $entrada->quantidade;
-        }
-
-        $produto->update();
-
-            $entrada = Entrada::create([
+        $entrada = Entrada::create([
             'id_produto' => $request->id_produto,
             'quantidade' => $request->quantidade
         ]);
 
+        if (isset($request->quantidade)) {
+            /*$soma = $produto->quantidade_estoque + $entrada->quantidade;
+            $produto->quantidade_estoque = $soma;
+
+            $produto->quantidade_estoque = $produto->quantidade_estoque + $entrada->quantidade;
+            */
+
+            $produto->quantidade_estoque += $entrada->quantidade;
+        }
+
+        $produto->update();
+
         return response()->json($entrada);
     }
 
-    public function index() {
+    public function index()
+    {
         $entrada = Entrada::all();
 
         return response()->json($entrada);
     }
 
-    public function delete($id) 
+    public function delete($id)
     {
         $entrada = Entrada::find($id);
 
-        if($entrada == null) {
-            return response()->json(['message' => 'Produto não encontrado']);
+        if ($entrada == null) {
+            return response()->json(['message' => 'Entrada não encontrada']);
         }
 
-        $produto = $entrada-> id_produto;
+        $produto = Produto::find($entrada->id_produto);
 
-        $quantidade = $entrada-> quantidade;
-
-        $produto = Produto::find($produto);
-
-        if(isset($produto)) {
-            $produto-> estoque -= $quantidade;
+        if (isset($produto)) {
+            $produto->quantidade_estoque -= $entrada->quantidade;
         }
 
         $produto->update();
 
         $entrada->delete($id);
 
-        return response()->json(['message' => 'Produto deletado com sucesso']);
+        return response()->json(['message' => 'Entrada deletada com sucesso']);
     }
 }
